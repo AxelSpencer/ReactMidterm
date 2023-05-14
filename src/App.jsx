@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import './App.css';
+import Button from './components/Button';
+import { ThemeContext } from './ThemeContext';
+import ToggleSwitch from './components/ToggleSwitch';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const navigate = useNavigate();
+
+  const handleShowHome = () => {
+    navigate('home');
+  };
+
+  const handleShowProducts = () => {
+    navigate('products');
+  };
+
+  const { toggleTheme } = useContext(ThemeContext);
+  
+  const { theme } = useContext( ThemeContext );
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <hr />
+      <Button onClick={() => handleShowHome()} className="button" bgcolor = {theme.btn} color = {theme.btncolor}>
+        Home
+      </Button>
+      <Button onClick={() => handleShowProducts()} className="button" bgcolor = {theme.btn} color = {theme.btncolor}>
+        Products
+      </Button>
+      <ToggleSwitch onToggle={toggleTheme} />
+
+      <hr />
+      <Outlet />
+    </div>
+  );
 }
 
-export default App
+export default App;
