@@ -6,10 +6,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './components/Home';
 import Products from './components/Products';
 import ProductDetail from './components/ProductDetail';
+import { ThemeProvider } from './ThemeContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} >
             <Route index element={<Home />} />
@@ -21,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           </Route>
           <Route path="*" element={<div>Route Not Found</div>} />
         </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>,
 )

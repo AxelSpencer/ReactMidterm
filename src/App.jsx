@@ -1,7 +1,9 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext } from 'react';
 import './App.css';
 import Button from './components/Button';
+import { ThemeContext } from './ThemeContext';
+import ToggleSwitch from './components/ToggleSwitch';
 
 
 function App() {
@@ -15,15 +17,20 @@ function App() {
     navigate('products');
   };
 
+  const { toggleTheme } = useContext(ThemeContext);
+  
+  const { theme } = useContext( ThemeContext );
+
   return (
     <div className="App">
       <hr />
-      <Button onClick={() => handleShowHome()} className="button">
+      <Button onClick={() => handleShowHome()} className="button" bgcolor = {theme.btn} color = {theme.btncolor}>
         Home
       </Button>
-      <Button onClick={() => handleShowProducts()} className="button">
+      <Button onClick={() => handleShowProducts()} className="button" bgcolor = {theme.btn} color = {theme.btncolor}>
         Products
       </Button>
+      <ToggleSwitch onToggle={toggleTheme} />
 
       <hr />
       <Outlet />

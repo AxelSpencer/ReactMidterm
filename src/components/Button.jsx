@@ -1,12 +1,13 @@
 import React from "react";
 
-const Button = ({ color = "", onClick, children }) => {
+const Button = ({ bgcolor = "", color = "", onClick, children }) => {
   return (
     <button
       onClick={onClick}
       style={{
         margin: '10px',
-        backgroundColor: color
+        backgroundColor: bgcolor,
+        color: color
       }}
     >
       {children}
